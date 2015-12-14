@@ -1,0 +1,6 @@
+reswrd   integer  newtoken delimiter newtoken newtoken newtoken newtoken
+reswrd   variable newtoken delimiter newtoken newtoken newtoken newtoken
+variable variable newtoken delimiter newtoken newtoken newtoken newtoken
+reswrd   integer  real     delimiter newtoken newtoken newtoken newtoken
+reswrd   real     newtoken delimiter newtoken newtoken newtoken newtoken
+reswrd   integer  newtoken newtoken  newtoken newtoken newtoken newtoken

@@ -1,0 +1,128 @@
+Reserved Words
+print  input  end  read  goto  for  if  then  step  rem  to  next  or  and   
+
+State Table: 
+***************************************************************************************************************
+            letter        digit       period       delimit        blank         pod        eoln        illegal
+---------------------------------------------------------------------------------------------------------------
+newtoken    reswrd       integer      newtoken     delimiter    newtoken     newtoken     newtoken     newtoken     
+reswrd      reswrd       variable     newtoken     delimiter    newtoken     newtoken     newtoken     newtoken     
+variable    variable     variable     newtoken     delimiter    newtoken     newtoken     newtoken     newtoken     
+integer     reswrd       integer      real         delimiter    newtoken     newtoken     newtoken     newtoken     
+real        reswrd       real         newtoken     delimiter    newtoken     newtoken     newtoken     newtoken     
+delimiter   reswrd       integer      newtoken     newtoken     newtoken     newtoken     newtoken     newtoken     
+***************************************************************************************************************
+
+
+Action Table: 
+**************************************************************************************
+          letter     digit    period   delimit     blank       pod      eoln   illegal
+newtoken     1         1         5         1         6         5         6         7         
+reswrd       1         1         4         8         2         10        2         11        
+variable     1         1         4         9         3         12        3         13        
+integer      9         1         1         9         3         4         3         13        
+real         9         1         4         9         3         4         3         13        
+delimiter    9         9         4         12        3         4         3         13        
+**************************************************************************************
+
+
+Explanations of Action Table Entries: 
+********************************************************************************************
+1 Load character and continue 
+2 Compare with table of reserved words, print token, reinitialize token
+3 Print token, reinitialize token
+4 Print token, write "Improper usage", print character, reinitialize token
+5 Write "Improper Usage", print chracter
+6 Continue
+7 Write "Illegal Character", print character
+8 Compare with table of reserved words, print token, reinitialize token, load char
+9 Print token, reinitialize token, load character
+10 Load character, change state to variable, print token, reinitialize token
+11 Compare with a table of reserved words, print token, write "Illegal character", print char
+12 Load character, print token, reinitialize token 
+13 Print Token, write "Illegal Character", print character, reinitialize token
+
+Scanner: 
+
+Token     Token Type
+------------------------------
+10        integer   
+rem       reswrd    
+12        integer   
+input     reswrd    
+x1        variable  
+,         delimiter 
+y         variable  
+13        integer   
+if        reswrd    
+x1        variable  
+<         delimiter 
+y         variable  
+then      reswrd    
+goto      reswrd    
+15        integer   
+14        integer   
+z         variable  
+=         delimiter 
+x1        variable  
+-         delimiter 
+y         variable  
+11        integer   
+goto      reswrd    
+16        integer   
+15        integer   
+z         variable  
+=         delimiter 
+x1        variable  
++         delimiter 
+y         variable  
+16        integer   
+print     reswrd    
+x1        variable  
+,         delimiter 
+y         variable  
+,         delimiter 
+z         variable  
+17        integer   
+for       reswrd    
+i         variable  
+=         delimiter 
+1         integer   
+to        reswrd    
+12        integer   
+step      reswrd    
+5         integer   
+18        integer   
+print     reswrd    
+i         variable  
+19        integer   
+next      reswrd    
+i         variable  
+20        integer   
+input     reswrd    
+st$       variable  
+21        integer   
+print     reswrd    
+"         $          Incorrect usage 
+",        delimiter 
+st%       variable  
+22        integer   
+read      reswrd    
+x         variable  
+23        integer   
+if        reswrd    
+x         variable  
+>=        delimiter 
+y1        variable  
+then      reswrd    
+x         variable  
+=         delimiter 
+y         variable  
+^         delimiter 
+3         integer   
+24        integer   
+print     reswrd    
+#         Illegal Symbol 
+x1        variable  
+25        integer   
+end       reswrd    
